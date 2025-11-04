@@ -61,20 +61,57 @@ const funTypes = (jsType) => {
 
 };
 
-const rounder = () => {
+const rounder = (float, roundSetting) => {
+  if (roundSetting === `up`) {
+    return Math.ceil(float)
+  }
+  if (roundSetting === `down`) {
+    return Math.floor(float)
+  }
+  if (roundSetting === `honest`) {
+    return Math.round(float)
+  }
 };
 
-const formatName = () => {
+const formatName = (first, last) => {
+  const captialize = str =>
+    str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+
+  return `${captialize(first)} ${captialize(last)}`;
 };
 
-const extractDomain = () => {
+const extractDomain = (email) => {
+  let domain = '';
+  const at = email.indexOf('@');
+  domain = email.slice((at + 1), email.length);
+  return domain;
 };
 
-const startsWithVowel = () => {
+const startsWithVowel = (str) => {
+  if (str[0].toLowerCase() === 'a' || str[0].toLowerCase() === 'e' || str[0].toLowerCase() === 'i' || str[0].toLowerCase() === 'o' || str[0].toLowerCase() === 'u') {
+    return true
+  }
+  else {
+    return false
+  }
+
 };
 
-const rotate = () => {
+console.log(startsWithVowel('Elephant'))
+
+
+
+const rotate = (str, num) => {
+  if (!str || num <= 0) return str;
+  const arr = str.split('');
+  for (let i = 0; i < num; i++) {
+    arr.unshift(arr.pop());
+  }
+  return arr.join('');
 };
+
+console.log(rotate("hello", 1));
+
 
 module.exports = {
   measureRain,
